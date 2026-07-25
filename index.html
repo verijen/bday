@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geburtstagsmission</title>
 
+<style>
+body{
+margin:0;
+background:#121212;
+color:white;
+font-family:Arial,sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+max-width:700px;
+padding:40px;
+text-align:center;
+background:#1f1f1f;
+border-radius:20px;
+box-shadow:0 0 20px rgba(255,255,255,.15);
+}
+
+h1{
+color:#ff69b4;
+font-size:3em;
+}
+
+button{
+margin-top:30px;
+padding:15px 35px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff69b4;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff4fa3;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>🎉 HAPPY BIRTHDAY! 🎉</h1>
+
+<h2>Verifizierung erforderlich</h2>
+
+<p>
+Dieses System ist ausschließlich für das Geburtstagskind bestimmt.
+</p>
+
+<p>
+Aus Sicherheitsgründen muss deine Identität überprüft werden.
+Nur wer alle Sicherheitsfragen korrekt beantwortet, erhält Zugriff auf das Geschenk.
+</p>
+
+<button onclick="start()">
+Verifizierung starten
+</button>
+
+</div>
+
+<script>
+function start(){
+alert("Begib dich zu dem Ort, an dem wir unsere Stövchen aufbewahren. Dort wartet der nächste Hinweis.");
+}
+</script>
+
+</body>
+</html>
