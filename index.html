@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geburtstagsmission</title>
+<title>Operation Birthday</title>
 
 <style>
+
 body{
 margin:0;
-background:#121212;
+font-family:Arial, Helvetica, sans-serif;
+background:#0d1117;
 color:white;
-font-family:Arial,sans-serif;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -18,25 +19,30 @@ height:100vh;
 }
 
 .box{
+width:90%;
 max-width:700px;
+background:#161b22;
 padding:40px;
-text-align:center;
-background:#1f1f1f;
 border-radius:20px;
-box-shadow:0 0 20px rgba(255,255,255,.15);
+text-align:center;
+box-shadow:0 0 30px rgba(255,105,180,.3);
 }
 
 h1{
 color:#ff69b4;
-font-size:3em;
+font-size:48px;
+}
+
+h2{
+margin-top:10px;
 }
 
 button{
-margin-top:30px;
+margin-top:35px;
 padding:15px 35px;
 font-size:18px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 background:#ff69b4;
 color:white;
 cursor:pointer;
@@ -45,6 +51,32 @@ cursor:pointer;
 button:hover{
 background:#ff4fa3;
 }
+
+#step2,#step3{
+display:none;
+}
+
+.progress{
+width:100%;
+height:28px;
+background:#333;
+border-radius:20px;
+overflow:hidden;
+margin-top:30px;
+}
+
+.bar{
+width:0%;
+height:100%;
+background:#ff69b4;
+transition:width .3s;
+}
+
+.small{
+color:#bdbdbd;
+margin-top:20px;
+}
+
 </style>
 </head>
 
@@ -52,30 +84,128 @@ background:#ff4fa3;
 
 <div class="box">
 
-<h1>🎉 HAPPY BIRTHDAY! 🎉</h1>
+<!-- Schritt 1 -->
 
-<h2>Verifizierung erforderlich</h2>
+<div id="step1">
+
+<h1>🎉 HAPPY BIRTHDAY, JENNY! ❤️</h1>
 
 <p>
-Dieses System ist ausschließlich für das Geburtstagskind bestimmt.
+Willkommen!
 </p>
 
 <p>
-Aus Sicherheitsgründen muss deine Identität überprüft werden.
-Nur wer alle Sicherheitsfragen korrekt beantwortet, erhält Zugriff auf das Geschenk.
+Bevor dieses System Zugriff auf dein Geburtstagsgeschenk gewährt,
+muss zunächst überprüft werden, ob du wirklich Jenny bist.
 </p>
 
-<button onclick="start()">
-Verifizierung starten
+<button onclick="startVerification()">
+Ich bin Jenny ❤️
 </button>
 
 </div>
 
+<!-- Schritt 2 -->
+
+<div id="step2">
+
+<h1>🔍 Identität wird überprüft...</h1>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<p class="small" id="status">
+Starte Überprüfung...
+</p>
+
+</div>
+
+<!-- Schritt 3 -->
+
+<div id="step3">
+
+<h1>🔐 Verifizierung erforderlich</h1>
+
+<p>
+Die automatische Identifizierung war leider nicht eindeutig.
+</p>
+
+<p>
+Aus Sicherheitsgründen müssen nun persönliche Fragen beantwortet werden,
+die ausschließlich das Geburtstagskind beantworten kann.
+</p>
+
+<h2>Erste Aufgabe</h2>
+
+<p>
+Begib dich zu dem Ort,
+an dem wir unsere <strong>Stövchen</strong> aufbewahren.
+</p>
+
+<p>
+Dort wartet der nächste Zugang.
+</p>
+
+<p style="color:#ff69b4;">
+Viel Erfolg. 😊
+</p>
+
+</div>
+
+</div>
+
 <script>
-function start(){
-alert("Begib dich zu dem Ort, an dem wir unsere Stövchen aufbewahren. Dort wartet der nächste Hinweis.");
+
+function startVerification(){
+
+document.getElementById("step1").style.display="none";
+document.getElementById("step2").style.display="block";
+
+let bar=document.getElementById("bar");
+let status=document.getElementById("status");
+
+let width=0;
+
+let interval=setInterval(function(){
+
+width+=2;
+
+bar.style.width=width+"%";
+
+if(width<25){
+status.innerHTML="Suche nach Jenny...";
 }
+else if(width<50){
+status.innerHTML="Gesichtserkennung...";
+}
+else if(width<75){
+status.innerHTML="Erinnerungen werden analysiert...";
+}
+else if(width<100){
+status.innerHTML="Zusätzliche Verifizierung erforderlich...";
+}
+
+if(width>=100){
+
+clearInterval(interval);
+
+setTimeout(function(){
+
+document.getElementById("step2").style.display="none";
+document.getElementById("step3").style.display="block";
+
+},800);
+
+}
+
+},60);
+
+}
+
 </script>
 
 </body>
 </html>
+
+Gesendet mit der GMX Mail App
