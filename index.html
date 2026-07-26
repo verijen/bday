@@ -47,26 +47,36 @@ input{flex:1;padding:12px;border-radius:10px;border:2px solid #666;font-size:16p
 </div>
 
 <div id="finish">
-
-    <h1>✅ Verifizierung erfolgreich!</h1>
-
-    <div class="success">
-
-        <p>
-            Du hast alle Sicherheitsfragen korrekt beantwortet.
-        </p>
-
-        <h2>❤️ Herzlichen Glückwunsch Jenny! ❤️</h2>
-
-        <p>
-            Gehe jetzt in den <strong>Flur</strong> zur <strong>weißen Kommode</strong>.<br><br>
-            Dein Geschenk befindet sich in der <strong>obersten Schublade</strong>. 🎁
-        </p>
-
-        <p style="font-size:18px; color:#ffb6d9;">
-            Alles Gute zum Geburtstag! ❤️
-        </p>
-
-    </div>
-
+<h1>✅ Verifizierung erfolgreich!</h1>
+<p>Du hast alle Sicherheitsfragen korrekt beantwortet.</p>
+<h2>❤️ Herzlichen Glückwunsch Jenny! ❤️</h2>
+<p>Dein Geburtstagsgeschenk wartet jetzt auf dich.</p>
+<button onclick="openGift()">🎁 Geschenk öffnen</button>
 </div>
+</div>
+
+<script>
+const answers={q1:"safeta",q2:"jebi se",q3:"pivo",q4:"09.09.2013",q5:"5"};
+function startQuiz(){start.style.display="none";quiz.style.display="block";}
+function normalize(t){return t.trim().toLowerCase();}
+function check(id){
+ const input=document.getElementById(id);
+ const icon=document.getElementById("c"+id.substring(1));
+ const ok=normalize(input.value)===normalize(answers[id]);
+ if(normalize(input.value)===""){input.className="";icon.textContent="";return false;}
+ input.className=ok?"correct":"wrong";
+ icon.textContent=ok?"✅":"❌";
+ return ok;
+}
+function checkAll(){
+ let total=0;
+ for(const k in answers){if(check(k)) total++;}
+ count.textContent=total;
+ bar.style.width=(total*20)+"%";
+ finishButton.style.display=total===5?"block":"none";
+}
+function finish(){quiz.style.display="none";document.getElementById("finish").style.display="block";}
+function openGift(){alert("🎉 Hier kannst du später dein Geschenk verlinken!");}
+</script>
+</body>
+</html>
