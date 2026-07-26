@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
 
 <meta charset="UTF-8">
@@ -9,133 +10,222 @@
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
 body{
+
 margin:0;
+padding:30px;
 font-family:Arial,Helvetica,sans-serif;
-background:linear-gradient(135deg,#111827,#1f2937);
-color:white;
+
+background:linear-gradient(135deg,#141e30,#243b55);
+
 display:flex;
 justify-content:center;
 align-items:center;
+
 min-height:100vh;
-padding:30px;
+
+color:white;
+
 }
 
-.box{
+.container{
+
 width:100%;
-max-width:750px;
-background:#202938;
+max-width:760px;
+
+background:#1b2433;
+
 padding:40px;
+
 border-radius:20px;
+
 box-shadow:0 0 30px rgba(255,105,180,.25);
+
 }
 
 h1{
+
 text-align:center;
 color:#ff69b4;
+
 margin-bottom:10px;
+
 }
 
 h2{
+
 text-align:center;
+
 }
 
 p{
+
 line-height:1.6;
+
 }
 
 button{
+
 width:100%;
+
 padding:16px;
+
 margin-top:25px;
+
 font-size:18px;
+
 border:none;
+
 border-radius:12px;
+
 background:#ff69b4;
+
 color:white;
+
 cursor:pointer;
+
 transition:.2s;
+
 }
 
 button:hover{
+
 background:#ff4fa3;
+
 }
 
-#quiz,
-#finish{
+#quiz{
+
 display:none;
+
+}
+
+#finish{
+
+display:none;
+
 }
 
 .progress{
+
 width:100%;
+
 height:18px;
-background:#444;
+
+background:#3c4658;
+
 border-radius:20px;
+
 overflow:hidden;
+
 margin-bottom:20px;
+
 }
 
 .bar{
-width:0%;
+
 height:100%;
-background:#4ade80;
+
+width:0%;
+
+background:#22c55e;
+
 transition:.3s;
-}
 
-.question{
-margin-top:22px;
-}
-
-label{
-display:block;
-margin-bottom:8px;
-font-weight:bold;
-}
-
-.answer{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-input{
-flex:1;
-padding:12px;
-font-size:16px;
-border-radius:10px;
-border:2px solid #555;
-outline:none;
-}
-
-.check{
-font-size:24px;
-width:30px;
-text-align:center;
-}
-
-.correct{
-border-color:#22c55e;
-}
-
-.wrong{
-border-color:#ef4444;
-}
-
-#finishButton{
-display:none;
-margin-top:35px;
 }
 
 .counter{
+
 text-align:center;
+
 font-size:18px;
-margin-bottom:15px;
+
+margin-bottom:20px;
+
+}
+
+.question{
+
+margin-top:25px;
+
+}
+
+label{
+
+display:block;
+
+font-weight:bold;
+
+margin-bottom:8px;
+
+}
+
+.answer{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+input{
+
+flex:1;
+
+padding:12px;
+
+font-size:16px;
+
+border-radius:10px;
+
+border:2px solid #666;
+
+outline:none;
+
+}
+
+.correct{
+
+border-color:#22c55e;
+
+}
+
+.wrong{
+
+border-color:#ef4444;
+
+}
+
+.icon{
+
+width:30px;
+
+font-size:24px;
+
+text-align:center;
+
+}
+
+#finishButton{
+
+display:none;
+
 }
 
 .success{
-font-size:22px;
+
 text-align:center;
+
 line-height:1.8;
+
+font-size:22px;
+
 }
 
 </style>
@@ -144,22 +234,28 @@ line-height:1.8;
 
 <body>
 
-<div class="box">
+<div class="container">
 
 <div id="start">
 
-<h1>🎉 HAPPY BIRTHDAY JENNY! ❤️</h1>
+<h1>🎉 HAPPY BIRTHDAY JENNY ❤️</h1>
 
 <p style="text-align:center;">
+
 Willkommen!
+
 <br><br>
+
 Bevor Zugriff auf dein Geburtstagsgeschenk gewährt werden kann,
 muss überprüft werden,
 ob du wirklich Jenny bist.
+
 </p>
 
 <button onclick="startQuiz()">
+
 ❤️ Ich bin Jenny
+
 </button>
 
 </div>
@@ -169,15 +265,21 @@ ob du wirklich Jenny bist.
 <h1>🔐 Verifizierung erforderlich</h1>
 
 <p style="text-align:center;">
-Nur Jenny kann alle Sicherheitsfragen korrekt beantworten.
+
+Bitte beantworte alle Fragen korrekt.
+
 </p>
 
 <div class="counter">
+
 <span id="count">0</span> / 5 richtig
+
 </div>
 
 <div class="progress">
+
 <div class="bar" id="bar"></div>
+
 </div>
 
 <div class="question">
@@ -185,8 +287,11 @@ Nur Jenny kann alle Sicherheitsfragen korrekt beantworten.
 <label>1. Wie heißt deine Mutter?</label>
 
 <div class="answer">
+
 <input id="q1" oninput="checkAll()">
-<div class="check" id="c1"></div>
+
+<div class="icon" id="i1"></div>
+
 </div>
 
 </div>
@@ -196,12 +301,14 @@ Nur Jenny kann alle Sicherheitsfragen korrekt beantworten.
 <label>2. Was heißt „Danke" auf jugoslawisch?</label>
 
 <div class="answer">
+
 <input id="q2" oninput="checkAll()">
-<div class="check" id="c2"></div>
-</div>
+
+<div class="icon" id="i2"></div>
 
 </div>
 
+</div>
 <div class="question">
 
 <label>3. Was heißt Bier auf jugoslawisch?</label>
