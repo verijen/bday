@@ -1,155 +1,266 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Operation Birthday</title>
+
+<title>Happy Birthday Jenny ❤️</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#0d1117;
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(135deg,#111827,#1f2937);
 color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+min-height:100vh;
+padding:30px;
 }
 
 .box{
-width:90%;
-max-width:700px;
-background:#161b22;
+width:100%;
+max-width:750px;
+background:#202938;
 padding:40px;
 border-radius:20px;
-text-align:center;
-box-shadow:0 0 30px rgba(255,105,180,.3);
+box-shadow:0 0 30px rgba(255,105,180,.25);
 }
 
 h1{
+text-align:center;
 color:#ff69b4;
-font-size:48px;
+margin-bottom:10px;
 }
 
 h2{
-margin-top:10px;
+text-align:center;
+}
+
+p{
+line-height:1.6;
 }
 
 button{
-margin-top:35px;
-padding:15px 35px;
+width:100%;
+padding:16px;
+margin-top:25px;
 font-size:18px;
 border:none;
 border-radius:12px;
 background:#ff69b4;
 color:white;
 cursor:pointer;
+transition:.2s;
 }
 
 button:hover{
 background:#ff4fa3;
 }
 
-#step2,#step3{
+#quiz,
+#finish{
 display:none;
 }
 
 .progress{
 width:100%;
-height:28px;
-background:#333;
+height:18px;
+background:#444;
 border-radius:20px;
 overflow:hidden;
-margin-top:30px;
+margin-bottom:20px;
 }
 
 .bar{
 width:0%;
 height:100%;
-background:#ff69b4;
-transition:width .3s;
+background:#4ade80;
+transition:.3s;
 }
 
-.small{
-color:#bdbdbd;
-margin-top:20px;
+.question{
+margin-top:22px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+.answer{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+input{
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:2px solid #555;
+outline:none;
+}
+
+.check{
+font-size:24px;
+width:30px;
+text-align:center;
+}
+
+.correct{
+border-color:#22c55e;
+}
+
+.wrong{
+border-color:#ef4444;
+}
+
+#finishButton{
+display:none;
+margin-top:35px;
+}
+
+.counter{
+text-align:center;
+font-size:18px;
+margin-bottom:15px;
+}
+
+.success{
+font-size:22px;
+text-align:center;
+line-height:1.8;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="box">
 
-<!-- Schritt 1 -->
+<div id="start">
 
-<div id="step1">
+<h1>🎉 HAPPY BIRTHDAY JENNY! ❤️</h1>
 
-<h1>🎉 HAPPY BIRTHDAY, JENNY! ❤️</h1>
-
-<p>
+<p style="text-align:center;">
 Willkommen!
+<br><br>
+Bevor Zugriff auf dein Geburtstagsgeschenk gewährt werden kann,
+muss überprüft werden,
+ob du wirklich Jenny bist.
 </p>
 
-<p>
-Bevor dieses System Zugriff auf dein Geburtstagsgeschenk gewährt,
-muss zunächst überprüft werden, ob du wirklich Jenny bist.
-</p>
-
-<button onclick="startVerification()">
-Ich bin Jenny ❤️
+<button onclick="startQuiz()">
+❤️ Ich bin Jenny
 </button>
 
 </div>
 
-<!-- Schritt 2 -->
+<div id="quiz">
 
-<div id="step2">
+<h1>🔐 Verifizierung erforderlich</h1>
 
-<h1>🔍 Identität wird überprüft...</h1>
+<p style="text-align:center;">
+Nur Jenny kann alle Sicherheitsfragen korrekt beantworten.
+</p>
+
+<div class="counter">
+<span id="count">0</span> / 5 richtig
+</div>
 
 <div class="progress">
 <div class="bar" id="bar"></div>
 </div>
 
-<p class="small" id="status">
-Starte Überprüfung...
-</p>
+<div class="question">
+
+<label>1. Wie heißt deine Mutter?</label>
+
+<div class="answer">
+<input id="q1" oninput="checkAll()">
+<div class="check" id="c1"></div>
+</div>
 
 </div>
 
-<!-- Schritt 3 -->
+<div class="question">
 
-<div id="step3">
+<label>2. Was heißt „Danke" auf jugoslawisch?</label>
 
-<h1>🔐 Verifizierung erforderlich</h1>
+<div class="answer">
+<input id="q2" oninput="checkAll()">
+<div class="check" id="c2"></div>
+</div>
+
+</div>
+
+<div class="question">
+
+<label>3. Was heißt Bier auf jugoslawisch?</label>
+
+<div class="answer">
+<input id="q3" oninput="checkAll()">
+<div class="check" id="c3"></div>
+</div>
+
+<div class="question">
+
+<label>4. Wann ist der Jahrestag von dir und Nati?</label>
+
+<div class="answer">
+<input id="q4" oninput="checkAll()">
+<div class="check" id="c4"></div>
+</div>
+
+</div>
+
+<div class="question">
+
+<label>5. Wenn du dich im Stockwerk deiner Mutter befindest und 4 Stockwerke hoch und 6 runter fährst, in welchem Stockwerk befindest du dich?</label>
+
+<div class="answer">
+<input id="q5" oninput="checkAll()">
+<div class="check" id="c5"></div>
+</div>
+
+</div>
+
+<button id="finishButton" onclick="finish()">
+✅ Verifizierung abschließen
+</button>
+
+</div>
+
+<div id="finish">
+
+<h1>✅ Verifizierung erfolgreich!</h1>
+
+<div class="success">
 
 <p>
-Die automatische Identifizierung war leider nicht eindeutig.
+Du hast alle Sicherheitsfragen korrekt beantwortet.
 </p>
+
+<h2>❤️ Herzlichen Glückwunsch! ❤️</h2>
 
 <p>
-Aus Sicherheitsgründen müssen nun persönliche Fragen beantwortet werden,
-die ausschließlich das Geburtstagskind beantworten kann.
+Gehe jetzt in den <strong>Flur</strong> und öffne die
+<strong>oberste Schublade im weißen Schrank.</strong>
 </p>
 
-<h2>Erste Aufgabe</h2>
+<h2>
+🎁 Alles Gute Jenny! ❤️❤️❤️
+</h2>
 
-<p>
-Begib dich zu dem Ort,
-an dem wir unsere <strong>Stövchen</strong> aufbewahren.
-</p>
-
-<p>
-Dort wartet der nächste Zugang.
-</p>
-
-<p style="color:#ff69b4;">
-Viel Erfolg. 😊
-</p>
+</div>
 
 </div>
 
@@ -157,49 +268,87 @@ Viel Erfolg. 😊
 
 <script>
 
-function startVerification(){
+const answers={
+q1:"safeta",
+q2:"jebi se",
+q3:"pivo",
+q4:"09.09.2013",
+q5:"5"
+};
 
-document.getElementById("step1").style.display="none";
-document.getElementById("step2").style.display="block";
+function startQuiz(){
 
-let bar=document.getElementById("bar");
-let status=document.getElementById("status");
-
-let width=0;
-
-let interval=setInterval(function(){
-
-width+=2;
-
-bar.style.width=width+"%";
-
-if(width<25){
-status.innerHTML="Suche nach Jenny...";
-}
-else if(width<50){
-status.innerHTML="Gesichtserkennung...";
-}
-else if(width<75){
-status.innerHTML="Erinnerungen werden analysiert...";
-}
-else if(width<100){
-status.innerHTML="Zusätzliche Verifizierung erforderlich...";
-}
-
-if(width>=100){
-
-clearInterval(interval);
-
-setTimeout(function(){
-
-document.getElementById("step2").style.display="none";
-document.getElementById("step3").style.display="block";
-
-},800);
+document.getElementById("start").style.display="none";
+document.getElementById("quiz").style.display="block";
 
 }
 
-},60);
+function normalize(text){
+return text.trim().toLowerCase();
+}
+
+function check(id){
+
+let input=document.getElementById(id);
+let icon=document.getElementById("c"+id.substring(1));
+
+let value=normalize(input.value);
+let correct=normalize(answers[id]);
+
+if(value===""){
+
+input.className="";
+icon.innerHTML="";
+return false;
+
+}
+
+if(value===correct){
+
+input.className="correct";
+icon.innerHTML="✅";
+return true;
+
+}else{
+
+input.className="wrong";
+icon.innerHTML="❌";
+return false;
+
+}
+
+}
+function checkAll(){
+
+let total=0;
+
+for(let key in answers){
+
+if(check(key)){
+total++;
+}
+
+}
+
+document.getElementById("count").innerHTML=total;
+document.getElementById("bar").style.width=(total*20)+"%";
+
+if(total===5){
+
+document.getElementById("finishButton").style.display="block";
+
+}else{
+
+document.getElementById("finishButton").style.display="none";
+
+}
+
+}
+
+function finish(){
+
+document.getElementById("quiz").style.display="none";
+document.getElementById("finish").style.display="block";
 
 }
 
@@ -207,3 +356,4 @@ document.getElementById("step3").style.display="block";
 
 </body>
 </html>
+</div>
